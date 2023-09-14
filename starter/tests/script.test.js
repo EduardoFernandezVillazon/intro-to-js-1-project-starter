@@ -1,4 +1,4 @@
-const cart = require('../src/assets/script.js');
+let cart = require('../src/assets/script.js');
 
 describe('Cart Functionality Tests', () => {
     let product1 = cart.products[1];
@@ -52,7 +52,7 @@ describe('Checkout Functionality Tests', () => {
 
         for (let i = 0; i < cartArr.length; i++) {
             let itemTotal = cartArr[i].quantity * cartArr[i].price;
-
+            console.log(itemTotal);
             cartSum += itemTotal;
         }
 
