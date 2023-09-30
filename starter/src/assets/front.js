@@ -1,5 +1,6 @@
 let currencySymbol = '$';
 
+var paid=0;
 // Draws product list
 function drawProducts() {
     let productList = document.querySelector('.products');
@@ -110,7 +111,8 @@ document.querySelector('.pay').addEventListener('click', (e) => {
     amount *= 1;
 
     // Set cashReturn to return value of pay()
-    let cashReturn = pay(amount);
+    let cashReturn = pay(amount+paid);
+    paid+=amount;
 
     let paymentSummary = document.querySelector('.pay-summary');
     let div = document.createElement('div');
@@ -125,7 +127,7 @@ document.querySelector('.pay').addEventListener('click', (e) => {
         `;
     } else {
         // reset cash field for next entry
-        document.querySelector('.received').value = '';
+        document.querySelector('.received').value = "" ;
         div.innerHTML = `
             <p>Cash Received: ${currencySymbol}${amount}</p>
             <p>Remaining Balance: ${cashReturn}$</p>
@@ -139,22 +141,22 @@ document.querySelector('.pay').addEventListener('click', (e) => {
 
 /* Standout suggestions */
 /* Begin remove all items from cart */
-// function dropCart(){
-//     let shoppingCart = document.querySelector('.empty-btn');
-//     let div = document.createElement("button");
-//     div.classList.add("empty");
-//     div.innerHTML =`Empty Cart`;
-//     shoppingCart.append(div);
-// }
-// dropCart();
+function dropCart(){
+let shoppingCart = document.querySelector('.empty-btn');
+let div = document.createElement("button");
+div.classList.add("empty");
+div.innerHTML =`Empty Cart`;
+shoppingCart.append(div);
+}
+dropCart();
 
-// document.querySelector('.empty-btn').addEventListener('click', (e) => {
-//     if (e.target.classList.contains('empty')){
-//         emptyCart();
-//         drawCart();
-//         drawCheckout();
-//     }
-// })
+document.querySelector('.empty-btn').addEventListener('click', (e) => {
+     if (e.target.classList.contains('empty')){
+         emptyCart();
+         drawCart();
+         drawCheckout();
+     }
+})
 /* End all items from cart */
 
 /* Begin currency converter */

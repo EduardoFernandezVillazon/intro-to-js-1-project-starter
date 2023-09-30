@@ -10,7 +10,7 @@ constructor(name, price, quantity, productId, image){
 }
 const products = [
   new Product("cherry", 3.5, 0, 0, "images/cherry.jpg"),
-  new Product("strawberry", 5, 0, 1, "images/orange.jpg"),
+  new Product("orange", 5, 0, 1, "images/orange.jpg"),
   new Product("strawberry", 2, 0, 2, "images/strawberry.jpg")
 ];
 
@@ -51,7 +51,7 @@ decreaseQuantity = function (decreaseProductId){
   const findProduct = (element) => element.productId==decreaseProductId;
   productIndex = products.findIndex(findProduct);
   products[productIndex].quantity--;
-  const isCartProduct = (element) => element == products[productIndex]
+  const isCartProduct = (element) => element == products[productIndex];
   if (products[productIndex].quantity==0){cart.splice(cart.findIndex(isCartProduct))};
   }
 /* Create a function named removeProductFromCart that takes in the productId as an argument
@@ -64,8 +64,8 @@ removeProductFromCart = function (removeProductId){
   const findProduct = (element) => element.productId==removeProductId;
   productIndex = products.findIndex(findProduct);
   products[productIndex].quantity=0;
-  const isCartProduct = (element) => element == products[productIndex]
-  cart.splice(cart.findIndex(isCartProduct));
+  const isCartProduct = (element) => element == products[productIndex];
+  cart.splice(cart.findIndex(isCartProduct),1);
   }
 /* Create a function named cartTotal that has no parameters
   - cartTotal should iterate through the cart to get the total of all products
@@ -79,12 +79,9 @@ cartTotal = function (){
 }
 /* Create a function called emptyCart that empties the products from the cart */
 emptyCart = function (){
-  cartSet = new Set(cart);
-  cartSet.clear()
-  const clearQuantity = (element) => element.quantity=0;
-  products.forEach(clearQuantity);
-  cart.length=0;
-  cart.push(Array.from(cartSet));
+  cart.splice(0,cart.length);
+  const setToZero = (element) => element.quantity=0;
+  products.forEach(setToZero);
 }
 /* Create a function named pay that takes in an amount as an argument
   - pay will return a negative number if there is a remaining balance
