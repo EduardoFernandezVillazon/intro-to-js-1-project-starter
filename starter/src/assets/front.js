@@ -1,6 +1,6 @@
 let currencySymbol = '$';
 
-var paid=0;
+
 // Draws product list
 function drawProducts() {
     let productList = document.querySelector('.products');
@@ -111,8 +111,8 @@ document.querySelector('.pay').addEventListener('click', (e) => {
     amount *= 1;
 
     // Set cashReturn to return value of pay()
-    let cashReturn = pay(amount+paid);
-    paid+=amount;
+    let cashReturn = pay(amount);
+    
 
     let paymentSummary = document.querySelector('.pay-summary');
     let div = document.createElement('div');

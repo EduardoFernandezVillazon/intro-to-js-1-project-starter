@@ -1,4 +1,6 @@
 
+var totalPaid=0;
+
 class Product{
 constructor(name, price, quantity, productId, image){
     this.name=name;
@@ -80,15 +82,24 @@ cartTotal = function (){
 /* Create a function called emptyCart that empties the products from the cart */
 emptyCart = function (){
   cart.splice(0,cart.length);
-  const setToZero = (element) => element.quantity=0;
+  const setToZero = (element) => removeProductFromCart(element.productId);
   products.forEach(setToZero);
 }
 /* Create a function named pay that takes in an amount as an argument
   - pay will return a negative number if there is a remaining balance
   - pay will return a positive number if money should be returned to customer
 */
-pay = function (amountPaid){
-  return amountPaid - cartTotal();
+pay = function (amount){
+  
+  totalPaid+=amount;
+  let remaining = totalPaid - cartTotal();
+  
+  if (remaining>=0){
+    totalPaid=0;
+    emptyCart()
+  }
+
+  return remaining;
 }
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
